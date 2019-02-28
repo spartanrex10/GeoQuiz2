@@ -2,8 +2,12 @@ package com.ctech.zachary.geoquiz;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Button true_button;
+    private Button false_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
