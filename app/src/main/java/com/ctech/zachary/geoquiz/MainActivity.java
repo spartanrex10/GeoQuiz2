@@ -9,31 +9,29 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button mTrueButton;
-    private Button mFalseButton;
+    private Button trueButton;
+    private Button falseButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTrueButton = (Button) findViewById(R.id.true_button);
-        mFalseButton = (Button) findViewById(R.id.false_button);
+        trueButton = findViewById(R.id.true_button);
+        falseButton = findViewById(R.id.false_button);
 
-        mTrueButton.setOnClickListener(new View.OnClickListener() {
+        trueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast= Toast.makeText(MainActivity.this,
-                        R.string.correct_toast, Toast.LENGTH_SHORT);
+                Toast toast= Toast.makeText(MainActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP, 0, 150);
                 toast.show();
             }
         });
-        mFalseButton.setOnClickListener(new View.OnClickListener() {
+        falseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast= Toast.makeText(MainActivity.this,
-                        R.string.incorrect_toast, Toast.LENGTH_SHORT);
+                Toast toast= Toast.makeText(MainActivity.this, R.string.incorrect_toast, Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.TOP, 0, 150);
                 toast.show();
             }
