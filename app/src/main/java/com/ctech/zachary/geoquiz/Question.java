@@ -1,27 +1,27 @@
 package com.ctech.zachary.geoquiz;
 
 public class Question {
-    private int mTextRedId;
+    private int mTextResId;
     private boolean mAnswerTrue;
 
     public Question(int textResId, boolean answerTrue) {
-        mTextRedId = textResId;
+        mTextResId = textResId;
         mAnswerTrue = answerTrue;
     }
 
-    public int getmTextRedId() {
-        return mTextRedId;
+    public int getTextResId() {
+        return mTextResId;
     }
 
-    public void setmTextRedId(int mTextRedId) {
-        this.mTextRedId = mTextRedId;
+    public void setTextResId(int textRedId) {
+        mTextResId = textRedId;
     }
 
-    public boolean ismAnswerTrue() {
+    public boolean isAnswerTrue() {
         return mAnswerTrue;
     }
 
-    public void setmAnswerTrue(boolean mAnswerTrue) {
-        this.mAnswerTrue = mAnswerTrue;
+    public void setAnswerTrue(boolean answerTrue) {
+        mAnswerTrue = answerTrue;
     }
 }

@@ -5,22 +5,42 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button trueButton;
-    private Button falseButton;
+    private Button mTrueButton;
+    private Button mFalseButton;
+    private Button mNextButton;
+    private TextView mQuestionTextView;
+
+    private Question[] mQuestionBank = new Question[] {
+            new Question(R.string.question_alaska, true),
+            new Question(R.string.question_america, false),
+            new Question(R.string.question_antarctica, false),
+            new Question(R.string.question_australia, true),
+            new Question(R.string.question_europe, true),
+            new Question(R.string.question_fox_village, true),
+            new Question(R.string.question_japan, false),
+            new Question(R.string.question_mississippi, true),
+    };
+
+    private int mCurrentIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        trueButton = findViewById(R.id.true_button);
-        falseButton = findViewById(R.id.false_button);
+        //Sets question to the current index
+        mQuestionTextView = findViewById(R.id.question_text_view);
 
-        trueButton.setOnClickListener(new View.OnClickListener() {
+        mTrueButton = findViewById(R.id.true_button);
+        mFalseButton = findViewById(R.id.false_button);
+        mNextButton = findViewById(R.id.next_button);
+
+        mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast toast= Toast.makeText(MainActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT);
@@ -28,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
             }
         });
-        falseButton.setOnClickListener(new View.OnClickListener() {
+        mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast toast= Toast.makeText(MainActivity.this, R.string.incorrect_toast, Toast.LENGTH_SHORT);
@@ -36,5 +56,19 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
             }
         });
+
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                updateQuestion();
+            }
+        });
+
+        updateQuestion();
+    }
+    private void updateQuestion() {
+        int questionResourceId = mQuestionBank[mCurrentIndex].getTextResId();
+        mQuestionTextView.setText(questionResourceId);
     }
 }

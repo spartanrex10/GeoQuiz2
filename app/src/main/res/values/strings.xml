@@ -1,8 +1,16 @@
 <resources>
     <string name="app_name">GeoQuiz</string>
-    <string name="question_text">Canberra is the capital of Australia</string>
     <string name="true_button">True</string>
     <string name="false_button">False</string>
+    <string name="next_button">Next</string>
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">Incorrect!</string>
+    <string name="question_australia">Is Canberra is the capital of Australia?</string>
+    <string name="question_america">Is Philadelphia the capital of the United States of America?</string>
+    <string name="question_japan">Is Kyoto the capital of Japan?</string>
+    <string name="question_europe">Is the United Kingdom made up of 3 kingdoms?</string>
+    <string name="question_mississippi">Is the Mississippi river the largest in the US?</string>
+    <string name="question_antarctica">Do polar bears live in the Antarctic?</string>
+    <string name="question_fox_village">In Japan, there is a tourist attraction called the Fox Village.</string>
+    <string name="question_alaska">In Alaska, there is a time of the year where the sun only sets for three hours.</string>
 </resources>
