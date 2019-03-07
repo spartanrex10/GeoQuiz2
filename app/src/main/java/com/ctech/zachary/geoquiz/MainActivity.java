@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
             new Question(R.string.question_fox_village, true),
             new Question(R.string.question_japan, false),
             new Question(R.string.question_mississippi, true),
+            new Question(R.string.question_chad, false),
+            new Question(R.string.question_colonies, false),
+            new Question(R.string.question_ctech, true),
     };
 
     private int mCurrentIndex = 0;
