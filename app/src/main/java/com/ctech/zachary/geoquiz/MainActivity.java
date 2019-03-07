@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,22 +39,18 @@ public class MainActivity extends AppCompatActivity {
 
         mTrueButton = findViewById(R.id.true_button);
         mFalseButton = findViewById(R.id.false_button);
-        mNextButton = findViewById(R.id.next_button);
+        ImageButton mNextButton = findViewById(R.id.next_button);
 
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast= Toast.makeText(MainActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP, 0, 150);
-                toast.show();
+                checkAnswer(true);
             }
         });
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast= Toast.makeText(MainActivity.this, R.string.incorrect_toast, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP, 0, 150);
-                toast.show();
+                checkAnswer(false);
             }
         });
 
@@ -70,5 +67,22 @@ public class MainActivity extends AppCompatActivity {
     private void updateQuestion() {
         int questionResourceId = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(questionResourceId);
+    }
+
+    private void checkAnswer(boolean userPressedTrue) {
+
+        boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+
+        int messageResourceId = 0;
+
+        if (userPressedTrue == answerIsTrue) {
+            messageResourceId = R.string.correct_toast;
+        } else {
+            messageResourceId = R.string.incorrect_toast;
+        }
+
+        Toast toast= Toast.makeText(MainActivity.this, messageResourceId, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP, 0, 150);
+        toast.show();
     }
 }
