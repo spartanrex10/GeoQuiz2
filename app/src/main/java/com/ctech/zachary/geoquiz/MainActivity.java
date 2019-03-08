@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button mTrueButton;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         mTrueButton = findViewById(R.id.true_button);
         mFalseButton = findViewById(R.id.false_button);
         ImageButton mNextButton = findViewById(R.id.next_button);
+        ImageButton mBackButton = findViewById(R.id.back_button);
 
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +64,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                updateQuestion();
+            }
+        });
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCurrentIndex = (mCurrentIndex - 1);
+                if (mCurrentIndex < 0) {
+                    mCurrentIndex = mQuestionBank.length - 1;
+                }
+                updateQuestion();
+            }
+        });
+        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Min: 0, Max: 11
+                final int random = new Random().nextInt(11);
+                mCurrentIndex = random;
                 updateQuestion();
             }
         });
