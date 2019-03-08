@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private int mCurrentIndex = 0;
+    // Min: 0, Max: 11
+    final int random = new Random().nextInt(11);
+    int messageResourceId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Min: 0, Max: 11
-                final int random = new Random().nextInt(11);
                 mCurrentIndex = random;
                 updateQuestion();
             }
@@ -97,8 +98,6 @@ public class MainActivity extends AppCompatActivity {
     private void checkAnswer(boolean userPressedTrue) {
 
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
-
-        int messageResourceId = 0;
 
         if (userPressedTrue == answerIsTrue) {
             messageResourceId = R.string.correct_toast;
