@@ -15,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mTrueButton;
     private Button mFalseButton;
-    private Button mNextButton;
+    private ImageButton mNextButton;
+    private ImageButton mBackButton;
     private TextView mQuestionTextView;
 
     private Question[] mQuestionBank = new Question[] {
@@ -47,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         mTrueButton = findViewById(R.id.true_button);
         mFalseButton = findViewById(R.id.false_button);
-        ImageButton mNextButton = findViewById(R.id.next_button);
-        ImageButton mBackButton = findViewById(R.id.back_button);
+        mNextButton = findViewById(R.id.next_button);
+        mBackButton = findViewById(R.id.back_button);
 
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
