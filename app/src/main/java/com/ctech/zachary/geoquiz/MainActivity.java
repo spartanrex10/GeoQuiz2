@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton mBackButton;
     private TextView mQuestionTextView;
     private static final String TAG = "MainActivity";
+    private static final String KEY_INDEX = "index";
 
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_alaska, true),
@@ -36,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private int mCurrentIndex = 0;
-    // Min: 0, Max: 11
-    final int random = new Random().nextInt(11);
     int messageResourceId = 0;
 
     @Override
@@ -45,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate(Bundle) has been called!");
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState != null) {
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+        }
 
         //Sets question to the current index
         mQuestionTextView = findViewById(R.id.question_text_view);
@@ -87,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Min: 0, Max: 11
+                int random = new Random().nextInt(11);
                 mCurrentIndex = random;
                 updateQuestion();
             }
@@ -128,6 +133,12 @@ public class MainActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         Log.d(TAG, "onPause has been called!");
+    }
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        Log.i(TAG, "onSaveInstanceState");
+        savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
     }
     @Override
     public void onStop() {
