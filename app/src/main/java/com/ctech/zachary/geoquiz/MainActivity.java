@@ -23,21 +23,22 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
 
     private Question[] mQuestionBank = new Question[] {
-            new Question(R.string.question_alaska, true),
-            new Question(R.string.question_america, false),
-            new Question(R.string.question_antarctica, false),
-            new Question(R.string.question_australia, true),
-            new Question(R.string.question_europe, true),
-            new Question(R.string.question_fox_village, true),
-            new Question(R.string.question_japan, false),
-            new Question(R.string.question_mississippi, true),
-            new Question(R.string.question_chad, false),
-            new Question(R.string.question_colonies, false),
-            new Question(R.string.question_ctech, true),
+            new Question(R.string.question_alaska, true, false),
+            new Question(R.string.question_america, false, false),
+            new Question(R.string.question_antarctica, false, false),
+            new Question(R.string.question_australia, true, false),
+            new Question(R.string.question_europe, true, false),
+            new Question(R.string.question_fox_village, true, false),
+            new Question(R.string.question_japan, false, false),
+            new Question(R.string.question_mississippi, true, false),
+            new Question(R.string.question_chad, false, false),
+            new Question(R.string.question_colonies, false, false),
+            new Question(R.string.question_ctech, true, false),
     };
 
     private int mCurrentIndex = 0;
     int messageResourceId = 0;
+    int points = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (userPressedTrue == answerIsTrue) {
             messageResourceId = R.string.correct_toast;
+            points = points + 1;
+            mQuestionBank[mCurrentIndex]  answered = true;
         } else {
             messageResourceId = R.string.incorrect_toast;
         }

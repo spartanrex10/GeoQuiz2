@@ -4,8 +4,8 @@
     <string name="false_button">False</string>
     <string name="next_button_content_description">Next question</string>
     <string name="back_button_content_description">Previous question</string>
-    <string name="correct_toast">Correct!</string>
-    <string name="incorrect_toast">Incorrect!</string>
+    <string name="correct_toast">Correct! +1 point!</string>
+    <string name="incorrect_toast">Incorrect! No points for you!</string>
     <string name="question_australia">Is Canberra is the capital of Australia?</string>
     <string name="question_america">Is Philadelphia the capital of the United States of America?</string>
     <string name="question_japan">Is Kyoto the capital of Japan?</string>
