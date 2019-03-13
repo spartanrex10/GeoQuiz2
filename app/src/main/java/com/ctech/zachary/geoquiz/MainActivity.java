@@ -46,24 +46,19 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate(Bundle) has been called!");
         setContentView(R.layout.activity_main);
 
+
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
         }
 
-        //Sets question to the current index
-        mQuestionTextView = findViewById(R.id.question_text_view);
-
         mTrueButton = findViewById(R.id.true_button);
-        mFalseButton = findViewById(R.id.false_button);
-        mNextButton = findViewById(R.id.next_button);
-        mBackButton = findViewById(R.id.back_button);
-
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkAnswer(true);
             }
         });
+        mFalseButton = findViewById(R.id.false_button);
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,13 +66,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mNextButton = findViewById(R.id.next_button);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean questionAnswered = mQuestionBank[mCurrentIndex].isAnswered();
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 updateQuestion();
+                if (questionAnswered = true) {
+                    mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                }
             }
         });
+        mBackButton = findViewById(R.id.back_button);
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 updateQuestion();
             }
         });
+        mQuestionTextView = findViewById(R.id.question_text_view);
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +102,10 @@ public class MainActivity extends AppCompatActivity {
 
         updateQuestion();
     }
+
+    //Sets question to the current index
     private void updateQuestion() {
+        //Log.d(TAG, "Updating question text", new Exception());
         int questionResourceId = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(questionResourceId);
     }
@@ -112,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         if (userPressedTrue == answerIsTrue) {
             messageResourceId = R.string.correct_toast;
             points = points + 1;
-            mQuestionBank[mCurrentIndex]  answered = true;
+            mQuestionBank[mCurrentIndex].setAnswered(true);
         } else {
             messageResourceId = R.string.incorrect_toast;
         }
@@ -120,6 +125,16 @@ public class MainActivity extends AppCompatActivity {
         Toast toast= Toast.makeText(MainActivity.this, messageResourceId, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP, 0, 150);
         toast.show();
+    }
+
+    private void allAnswered() {
+        int j = 0;
+        for (int i = 0; i <= mQuestionBank.length; i++) {
+            boolean questionAnswered = mQuestionBank[i].isAnswered();
+            if (questionAnswered = true) {
+                j = j + 1;
+            }
+        }
     }
 
     @Override

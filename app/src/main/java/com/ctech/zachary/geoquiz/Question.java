@@ -3,7 +3,7 @@ package com.ctech.zachary.geoquiz;
 public class Question {
     private int mTextResId;
     private boolean mAnswerTrue;
-    private boolean mAnswered
+    private boolean mAnswered;
 
     public Question(int textResId, boolean answerTrue, boolean answered) {
         mTextResId = textResId;
@@ -15,8 +15,8 @@ public class Question {
         return mTextResId;
     }
 
-    public void setTextResId(int textRedId) {
-        mTextResId = textRedId;
+    public void setTextResId(int textResId) {
+        mTextResId = textResId;
     }
 
     public boolean isAnswerTrue() {
