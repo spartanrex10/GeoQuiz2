@@ -72,19 +72,23 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean questionAnswered = mQuestionBank[mCurrentIndex].isAnswered();
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-                updateQuestion();
                 if (questionAnswered = true) {
                     mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 }
+                updateQuestion();
             }
         });
         mBackButton = findViewById(R.id.back_button);
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean questionAnswered = mQuestionBank[mCurrentIndex].isAnswered();
                 mCurrentIndex = (mCurrentIndex - 1);
                 if (mCurrentIndex < 0) {
                     mCurrentIndex = mQuestionBank.length - 1;
+                }
+                if (questionAnswered = true) {
+                    mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 }
                 updateQuestion();
             }
@@ -121,20 +125,33 @@ public class MainActivity extends AppCompatActivity {
         } else {
             messageResourceId = R.string.incorrect_toast;
         }
-
-        Toast toast= Toast.makeText(MainActivity.this, messageResourceId, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.TOP, 0, 150);
-        toast.show();
+        toastCall();
     }
-
+    //Will be called to check if all of the questions have been answered.
     private void allAnswered() {
+        //'j' stands for how many questions you have answered.
         int j = 0;
-        for (int i = 0; i <= mQuestionBank.length; i++) {
+        //This 'for loop' subsequently checks each question, starting with item 0 of the array.
+        for (int i = 0; i <= mQuestionBank.length - 1; i++) {
             boolean questionAnswered = mQuestionBank[i].isAnswered();
+            //This checks if the question has been answered and adds to the amount of questions you have answered.
             if (questionAnswered = true) {
                 j = j + 1;
             }
+            //If you have answered all the questions, then you have finished the game.
+            if (j == mQuestionBank.length) {
+                for (int k = 0; k <= mQuestionBank.length - 1; k++) {
+                    mQuestionBank[k].setAnswered(true);
+                }
+                messageResourceId = R.string.game_finish + points;
+                toastCall();
+            }
         }
+    }
+    private void toastCall() {
+        Toast toast= Toast.makeText(MainActivity.this, messageResourceId, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP, 0, 150);
+        toast.show();
     }
 
     @Override
