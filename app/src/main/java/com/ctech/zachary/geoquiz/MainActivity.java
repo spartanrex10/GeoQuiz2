@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean questionAnswered = mQuestionBank[mCurrentIndex].isAnswered();
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-                if (questionAnswered = true) {
+                if (questionAnswered) {
                     mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 }
                 updateQuestion();
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 if (mCurrentIndex < 0) {
                     mCurrentIndex = mQuestionBank.length - 1;
                 }
-                if (questionAnswered = true) {
+                if (questionAnswered) {
                     mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 }
                 updateQuestion();
@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Sets question to the current index
     private void updateQuestion() {
+        allAnswered();
         //Log.d(TAG, "Updating question text", new Exception());
         int questionResourceId = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(questionResourceId);
@@ -122,8 +123,13 @@ public class MainActivity extends AppCompatActivity {
             messageResourceId = R.string.correct_toast;
             points = points + 1;
             mQuestionBank[mCurrentIndex].setAnswered(true);
+            mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+            updateQuestion();
         } else {
             messageResourceId = R.string.incorrect_toast;
+            mQuestionBank[mCurrentIndex].setAnswered(true);
+            mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+            updateQuestion();
         }
         toastCall();
     }
@@ -135,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i <= mQuestionBank.length - 1; i++) {
             boolean questionAnswered = mQuestionBank[i].isAnswered();
             //This checks if the question has been answered and adds to the amount of questions you have answered.
-            if (questionAnswered = true) {
+            if (questionAnswered) {
                 j = j + 1;
             }
             //If you have answered all the questions, then you have finished the game.
